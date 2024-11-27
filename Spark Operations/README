@@ -1,0 +1,75 @@
+# Spark Operations  
+
+## Lesson Objectives  
+In this lesson, we will explore the following topics:  
+- **Types of Spark Operations**: Understanding transformations and actions.  
+- **Immutability in Spark**: Examining the concept of immutability and its implications.  
+- **Practical Examples**: Exploring transformations and actions, including the benefits of lazy evaluation.  
+
+---
+
+## Overview  
+
+### Spark Operations  
+Spark operations on distributed data can be categorized into two types:  
+1. **Transformations**: Operations that create a new dataset from an existing one without altering the original data.  
+2. **Actions**: Operations that trigger the execution of transformations to produce results or save data.  
+
+All Spark operations are **immutable**, meaning the original data remains unchanged.  
+
+---
+
+### Immutability in Spark  
+- **Definition**: An object whose state cannot change after creation is called immutable.  
+- **Behavior**: Methods of immutable objects do not modify the object’s state but instead return a new object.  
+
+Immutability ensures the reliability and consistency of distributed data processing.
+
+---
+
+## Spark Transformations  
+
+### What Are Transformations?  
+Transformations define operations that transform a Spark DataFrame into a new DataFrame without modifying the original.  
+
+#### Examples of Transformations:  
+- **`map()`**: Applies a function to each element of the dataset.  
+- **`select()`**: Selects specific columns.  
+- **`filter()`**: Filters rows based on a condition.  
+- **`drop()`**: Removes specified columns or rows.  
+
+---
+
+### Lazy Transformations  
+- Transformations in Spark are **lazy**, meaning computations are deferred until an action is called.  
+- Spark builds a **Directed Acyclic Graph (DAG)** of all transformations and records them as a **lineage**.  
+
+#### Benefits of Lazy Evaluation:  
+1. **Optimization**:  
+   - Spark rearranges and optimizes transformations before execution.  
+2. **Resource Management**:  
+   - Avoids redundant computations, reducing resource usage.  
+3. **Fault Tolerance**:  
+   - Enables recomputation of parts of the pipeline if needed.  
+
+#### Example:  
+Consider a dataset with `map()` and `filter()` transformations. These operations are not executed immediately but are performed only when an action like `collect()` or `count()` is called.
+
+---
+
+## Spark Actions  
+
+### What Are Actions?  
+Actions trigger the execution of transformations and produce results. They are used to either:  
+- Return results to the Spark driver program.  
+- Write data to an external storage system.  
+
+#### Common Examples of Actions:  
+- **`collect()`**: Gathers all elements from the distributed dataset and returns them to the driver program.  
+- **`count()`**: Returns the total number of elements in the dataset.  
+- **`saveAsTextFile(path)`**: Saves the dataset to a text file at the specified path.  
+- **`take(n)`**: Returns an array containing the first `n` elements of the dataset.  
+
+---
+
+By understanding and leveraging Spark’s operations, you can optimize distributed data processing pipelines for better performance, resource efficiency, and fault tolerance.  
